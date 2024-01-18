@@ -34,8 +34,6 @@ html,
   -moz-tab-size: 4; /* 3 */
   tab-size: 4; /* 3 */
   font-family: theme('fontFamily.sans', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"); /* 4 */
-  font-feature-settings: theme('fontFamily.sans[1].fontFeatureSettings', normal); /* 5 */
-  font-variation-settings: theme('fontFamily.sans[1].fontVariationSettings', normal); /* 6 */
   -webkit-tap-highlight-color: transparent; /* 7 */
 }
 
@@ -113,8 +111,6 @@ kbd,
 samp,
 pre {
   font-family: theme('fontFamily.mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace); /* 1 */
-  font-feature-settings: theme('fontFamily.mono[1].fontFeatureSettings', normal); /* 2 */
-  font-variation-settings: theme('fontFamily.mono[1].fontVariationSettings', normal); /* 3 */
   font-size: 1em; /* 4 */
 }
 
@@ -193,15 +189,6 @@ select {
 1. Correct the inability to style clickable types in iOS and Safari.
 2. Remove default button styles.
 */
-
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-  -webkit-appearance: button; /* 1 */
-  background-color: transparent; /* 2 */
-  background-image: none; /* 2 */
-}
 
 /*
 Use the modern Firefox focus style for all focusable elements.

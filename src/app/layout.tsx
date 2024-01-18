@@ -22,14 +22,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.className} min-h-screen flex flex-col items-center w-full`}>
+      <body
+        className={`${spaceGrotesk.className} min-h-screen flex flex-col items-center w-full`}
+      >
         <AntdRegistry>
           <ConfigProvider theme={theme}>
             <Web3ModalProvider>
-              <Navigator />
-              <main className='flex flex-col items-center px-6 w-full'>
-                {children}
-              </main>
+                <Navigator />
+                <main className="flex flex-col items-center px-6 w-full">
+                  {children}
+                </main>
             </Web3ModalProvider>
           </ConfigProvider>
         </AntdRegistry>

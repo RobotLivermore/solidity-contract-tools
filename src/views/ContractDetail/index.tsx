@@ -24,7 +24,7 @@ const ContractDetail: FC<Props> = ({ id }) => {
   console.log(contract)
   return (
     <div className="w-full">
-      ContractDetail
+      <h1 className='text-4xl font-bold py-2'>ContractDetail</h1>
       <AbiRender abi={contract?.abi} address={contract?.address} />
     </div>
   )

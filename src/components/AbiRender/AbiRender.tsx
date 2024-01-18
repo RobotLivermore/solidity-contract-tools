@@ -1,34 +1,75 @@
-import type { Abi } from 'viem'
+'use client'
+
 import { Button, Collapse, Input } from 'antd'
-import { useCallback, useState } from 'react'
-import { useContractRead, usePublicClient } from 'wagmi'
+import { useCallback, useState, useMemo } from 'react'
+import { useWeb3ModalProvider } from '@web3modal/ethers/react'
+import { BrowserProvider, Interface, JsonFragment } from 'ethers'
+import { useWeb3ModalAccount } from '@web3modal/ethers/react'
 
 interface Props {
-  abi: Abi
+  abi: JsonFragment[]
   address: string
 }
 
 export function AbiRender({ abi, address }: Props) {
-  const publicClient = usePublicClient()
   const [params, setParams] = useState<Record<string, string | undefined>>({})
-  const [result, setResult] = useState<string>('')
+  const [result, setResult] = useState<Record<string, string | undefined>>({})
+  const { walletProvider } = useWeb3ModalProvider()
+  console.log(params)
 
-  const changeParam = useCallback((key: string, value: string) => {
-    setParams((prev) => ({
-      ...prev,
-      [key]: value,
-    }))
-  }, [])
 
-  const query  = async (functionName: string) => {
-    console.log(functionName, address)
-    console.log(publicClient.chain)
-    const result = await publicClient.readContract({abi, address: address as `0x${string}`, functionName: functionName})
-    console.log(result)
+  const changeParam = useCallback(
+    (functionName: string, key: string, value: string) => {
+      setParams((prev) => ({
+        ...prev,
+        [`${functionName}_${key}`]: value,
+      }))
+    },
+    []
+  )
+
+  const getParamValue = (functionName: string, key: string) => {
+    return params[`${functionName}_${key}`]
   }
 
-  const write = useCallback(async () => {
-  }, [])
+  const iface = useMemo(() => {
+    if (!abi) return
+    return new Interface(abi)
+  }, [abi])
+
+  const query = async (data: string, functionName: string) => {
+    console.log('walletProvider', walletProvider)
+    if (walletProvider && iface) {
+      const provider = new BrowserProvider(walletProvider)
+      const result = await provider?.call({
+        to: address,
+        data: data,
+      })
+      try {
+        const decodedData = iface.decodeFunctionResult(functionName!, result!)
+        console.log(decodedData.toString())
+        setResult((pre) => ({ ...pre, [functionName]: decodedData.toString() }))
+      } catch (e) {
+        console.log(e)
+      }
+      console.log('result', result)
+    }
+  }
+
+  const handleWrite = async (data: string) => {
+    console.log('data', data)
+    if (walletProvider) {
+      const provider = new BrowserProvider(walletProvider)
+      const signer = await provider?.getSigner()
+      const tx = await signer?.sendTransaction({
+        to: address,
+        data,
+      })
+      const receipt = await tx?.wait()
+      console.log(receipt)
+    }
+  }
+  console.log(result)
 
   if (!abi) return null
   return (
@@ -52,24 +93,57 @@ export function AbiRender({ abi, address }: Props) {
                         <div className="my-1 w-full flex flex-col" key={idx}>
                           <Input
                             placeholder={`${input.name}(${input.type})`}
-                            value={params[input.name as string]}
+                            value={getParamValue(item.name as string, input.name as string)}
                             onChange={(
                               e: React.ChangeEvent<HTMLInputElement>
                             ) => {
                               const value = e.target.value
-                              changeParam(input.name as string, value)
+                              changeParam(item.name as string, input.name as string, value)
                             }}
                           />
                         </div>
                       )
                     })}
                     <div className="flex justify-between">
-                      <p>{result}</p>
+                      <p>{result[item.name || '']}</p>
                       <Button
                         className="btn btn-primary btn-sm"
-                        onClick={isQuery ? () => {
-                          query(item.name as string)
-                        } : write}
+                        onClick={
+                          isQuery
+                            ? () => {
+                                try {
+                                  if (!iface) return
+                                  const values =
+                                    item.inputs?.map(
+                                      (ipt) => getParamValue(item.name as string, ipt.name as string)
+                                    ) || []
+                                  const data = iface.encodeFunctionData(
+                                    item.name!,
+                                    values
+                                  )
+                                  console.log(data)
+                                  query(data, item.name as string)
+                                } catch {}
+                              }
+                            : () => {
+                                try {
+                                  if (!iface) return
+                                  const values =
+                                    item.inputs?.map(
+                                      (ipt) => getParamValue(item.name as string, ipt.name as string)
+                                    ) || []
+                                  console.log(values)
+                                  const data = iface.encodeFunctionData(
+                                    item.name!,
+                                    values
+                                  )
+                                  console.log(data)
+                                  handleWrite(data)
+                                } catch (e) {
+                                  console.log(e)
+                                }
+                              }
+                        }
                       >
                         {item.stateMutability === 'view' ? 'Query' : 'Write'}
                       </Button>

@@ -1,12 +1,18 @@
 'use client'
 
-import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
 
-import { WagmiConfig } from 'wagmi'
-import { sepolia, mainnet } from 'viem/chains'
 
 // 1. Get projectId at https://cloud.walletconnect.com
 const projectId = '47fbadcdab684a00eda50b6e530863a2'
+
+const sepolia = {
+  chainId: 11_155_111,
+  name: 'Sepolia',
+  currency: 'SEP',
+  explorerUrl: 'https://sepolia.etherscan.io',
+  rpcUrl: 'https://rpc.sepolia.org'
+}
 
 // 2. Create wagmiConfig
 const metadata = {
@@ -16,12 +22,14 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/37784886'],
 }
 
-const chains = [mainnet, sepolia]
-const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+createWeb3Modal({
+  ethersConfig: defaultConfig({ metadata, enableEmail: true }),
+  chains: [sepolia],
+  projectId,
+  themeMode: 'light'
+})
 
-// 3. Create modal
-createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'light' })
 
 export function Web3ModalProvider({ children }: { children: React.ReactNode }) {
-  return <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig>
+  return children
 }

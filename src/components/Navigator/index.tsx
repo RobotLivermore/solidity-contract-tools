@@ -2,12 +2,11 @@
 
 import { Button } from 'antd'
 import React from 'react'
-import { useWeb3Modal } from '@web3modal/wagmi/react'
-import { useAccount, useEnsName } from 'wagmi'
+import { useWeb3Modal, useWeb3ModalAccount } from '@web3modal/ethers/react'
 
 const Navigator: React.FC = () => {
   const { open } = useWeb3Modal()
-  const account = useAccount()
+  const account = useWeb3ModalAccount()
 
   return (
     <nav className="flex justify-center w-full border border-b">
