@@ -10,9 +10,10 @@ import { v4 as uuidv4 } from 'uuid'
 interface ImportAbiModalProps {
   open: boolean
   onCancel: () => void
+  onOk: () => void
 }
 
-export const ImportAbiModal: FC<ImportAbiModalProps> = ({ open, onCancel }) => {
+export const ImportAbiModal: FC<ImportAbiModalProps> = ({ open, onCancel, onOk }) => {
   const [projectName, setProjectName] = useState('')
   const [contractAddress, setContractAddress] = useState('')
   const [abi, setAbi] = useState('')
@@ -34,7 +35,7 @@ export const ImportAbiModal: FC<ImportAbiModalProps> = ({ open, onCancel }) => {
       abi: parsedAbi,
     })
     localStorage.setItem('projects', JSON.stringify(projectsObjs))
-    onCancel()
+    onOk()
   }
   return (
     <Modal title="Import Contract" open={open} onCancel={onCancel} onOk={parse}>

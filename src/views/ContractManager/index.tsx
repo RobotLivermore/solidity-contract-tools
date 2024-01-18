@@ -43,7 +43,7 @@ const ContractManagerView: FC = () => {
       key: 'operation',
       render: (id: string) => {
         return (
-          <div className='flex items-center space-x-3'>
+          <div className="flex items-center space-x-3">
             <Button
               onClick={() => {
                 router.push(`/contract/${id}`)
@@ -52,7 +52,7 @@ const ContractManagerView: FC = () => {
               Go
             </Button>
             <Button
-              type='primary'
+              type="primary"
               danger
               onClick={() => {
                 const projects = localStorage.getItem('projects')
@@ -70,9 +70,9 @@ const ContractManagerView: FC = () => {
                 localStorage.setItem('projects', JSON.stringify(newProjects))
                 setProjects(newProjects)
               }}
-              className='flex items-center'
+              className="flex items-center"
             >
-              <DeleteOutlined className='!flex items-center' />
+              <DeleteOutlined className="!flex items-center" />
             </Button>
           </div>
         )
@@ -97,6 +97,17 @@ const ContractManagerView: FC = () => {
         open={isImportAbiModalOpen}
         onCancel={() => {
           setIsImportAbiModalOpen(false)
+        }}
+        onOk={() => {
+          setIsImportAbiModalOpen(false)
+          try {
+            const projects = localStorage.getItem('projects')
+            if (projects) {
+              setProjects(JSON.parse(projects))
+            }
+          } catch (e) {
+            console.log(e)
+          }
         }}
       />
     </div>
