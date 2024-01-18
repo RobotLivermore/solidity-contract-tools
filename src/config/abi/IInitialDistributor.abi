@@ -1,0 +1,4 @@
+[
+  "function setMinter(address _minter)",
+  "function setStartPeriod(uint256 _start_period)"
+]

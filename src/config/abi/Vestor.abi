@@ -1,0 +1,22 @@
+[
+  "constructor(address _sky)",
+  "error OwnableInvalidOwner(address owner)",
+  "error OwnableUnauthorizedAccount(address account)",
+  "event OwnershipTransferred(address indexed previousOwner, address indexed newOwner)",
+  "event RevokeToUpdated(address oldAddress, address newAddress)",
+  "event Vested(address indexed from, uint256 amount)",
+  "event VestingCancelled(address user, uint256 amount)",
+  "event VestingCreated(address user, uint256 amount)",
+  "function SKY() view returns (address)",
+  "function VESTING_DURATION() view returns (uint256)",
+  "function cancelVest(address user)",
+  "function claim() returns (uint256 vestedAmount)",
+  "function getClaim(address _vester) view returns (uint256 vestedAmount)",
+  "function owner() view returns (address)",
+  "function renounceOwnership()",
+  "function revokeTo() view returns (address)",
+  "function setRevokeTo(address _revokeTo)",
+  "function transferOwnership(address newOwner)",
+  "function vest(address) view returns (uint192 amount, uint64 lastClaim, uint128 start, uint128 end)",
+  "function vestFor(address user, uint256 amount)"
+]

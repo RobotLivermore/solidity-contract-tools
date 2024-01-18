@@ -1,0 +1,7 @@
+[
+  "function claimFees() returns (uint256 claimed0, uint256 claimed1)",
+  "function getReward(address account, address[] tokens)",
+  "function isForPair() view returns (bool)",
+  "function left(address token) view returns (uint256)",
+  "function notifyRewardAmount(address token, uint256 amount)"
+]

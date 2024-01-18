@@ -1,0 +1,4 @@
+[
+  "constructor(address _token0, address _token1)",
+  "function claimFeesFor(address recipient, uint256 amount0, uint256 amount1)"
+]

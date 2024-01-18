@@ -1,0 +1,7 @@
+[
+  "function _deposit(uint256 amount, uint256 tokenId)",
+  "function _withdraw(uint256 amount, uint256 tokenId)",
+  "function getRewardForOwner(uint256 tokenId, address[] tokens)",
+  "function left(address token) view returns (uint256)",
+  "function notifyRewardAmount(address token, uint256 amount)"
+]

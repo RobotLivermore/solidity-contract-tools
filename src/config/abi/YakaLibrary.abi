@@ -1,0 +1,8 @@
+[
+  "constructor(address _router)",
+  "function getAmountOut(uint256 amountIn, address tokenIn, address tokenOut, bool stable) view returns (uint256)",
+  "function getMinimumValue(address tokenIn, address tokenOut, bool stable) view returns (uint256, uint256, uint256)",
+  "function getSample(address tokenIn, address tokenOut, bool stable) view returns (uint256)",
+  "function getTradeDiff(uint256 amountIn, address tokenIn, address tokenOut, bool stable) view returns (uint256 a, uint256 b)",
+  "function getTradeDiff(uint256 amountIn, address tokenIn, address pair) view returns (uint256 a, uint256 b)"
+]

@@ -1,8 +1,14 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Space_Grotesk as SpaceGrotesk } from 'next/font/google'
+import './preflight.css'
 import './globals.css'
+import { Web3ModalProvider } from '@/context/Web3ModalContext'
+import { AntdRegistry } from '@ant-design/nextjs-registry'
+import { ConfigProvider } from 'antd'
+import theme from '@/config/themeConfig'
+import Navigator from '@/components/Navigator'
 
-const inter = Inter({ subsets: ['latin'] })
+const spaceGrotesk = SpaceGrotesk({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +22,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${spaceGrotesk.className} min-h-screen flex flex-col items-center w-full`}>
+        <AntdRegistry>
+          <ConfigProvider theme={theme}>
+            <Web3ModalProvider>
+              <Navigator />
+              <main className='flex flex-col items-center px-6 w-full'>
+                {children}
+              </main>
+            </Web3ModalProvider>
+          </ConfigProvider>
+        </AntdRegistry>
+      </body>
     </html>
   )
 }

@@ -1,0 +1,9 @@
+[
+  "function approve(address spender, uint256 value) returns (bool)",
+  "function balanceOf(address) view returns (uint256)",
+  "function mint(address, uint256) returns (bool)",
+  "function minter() returns (address)",
+  "function totalSupply() view returns (uint256)",
+  "function transfer(address, uint256) returns (bool)",
+  "function transferFrom(address, address, uint256) returns (bool)"
+]

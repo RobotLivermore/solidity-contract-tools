@@ -1,0 +1,12 @@
+[
+  "function _ve() view returns (address)",
+  "function attachTokenToGauge(uint256 _tokenId, address account)",
+  "function detachTokenFromGauge(uint256 _tokenId, address account)",
+  "function distribute(address _gauge)",
+  "function emergencyCouncil() view returns (address)",
+  "function emitDeposit(uint256 _tokenId, address account, uint256 amount)",
+  "function emitWithdraw(uint256 _tokenId, address account, uint256 amount)",
+  "function governor() view returns (address)",
+  "function isWhitelisted(address token) view returns (bool)",
+  "function notifyRewardAmount(uint256 amount)"
+]

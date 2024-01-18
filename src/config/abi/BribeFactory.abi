@@ -1,0 +1,6 @@
+[
+  "function createExternalBribe(address[] allowedRewards) returns (address)",
+  "function createInternalBribe(address[] allowedRewards) returns (address)",
+  "function last_external_bribe() view returns (address)",
+  "function last_internal_bribe() view returns (address)"
+]

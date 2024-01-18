@@ -1,0 +1,3 @@
+[
+  "function pairFor(address tokenA, address tokenB, bool stable) view returns (address pair)"
+]

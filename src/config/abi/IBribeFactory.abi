@@ -1,0 +1,4 @@
+[
+  "function createExternalBribe(address[]) returns (address)",
+  "function createInternalBribe(address[]) returns (address)"
+]

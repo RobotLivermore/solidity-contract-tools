@@ -1,0 +1,7 @@
+[
+  "function allPairsLength() view returns (uint256)",
+  "function createPair(address tokenA, address tokenB, bool stable) returns (address pair)",
+  "function getPair(address tokenA, address token, bool stable) view returns (address)",
+  "function isPair(address pair) view returns (bool)",
+  "function pairCodeHash() pure returns (bytes32)"
+]

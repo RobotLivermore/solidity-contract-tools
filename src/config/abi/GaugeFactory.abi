@@ -1,0 +1,4 @@
+[
+  "function createGauge(address _pool, address _internal_bribe, address _external_bribe, address _ve, bool isPair, address[] allowedRewards) returns (address)",
+  "function last_gauge() view returns (address)"
+]
